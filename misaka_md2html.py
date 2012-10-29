@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """Requirements:
-python 3            built-in unicode support helps avoid text processing errors
+python 3            for more robust unicode support
 misaka              http://misaka.61924.nl/
 jinja2              http://jinja.pocoo.org/
 
