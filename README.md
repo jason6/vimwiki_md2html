@@ -15,22 +15,27 @@ It also respects the following Vimwiki percent codes:
 Requirements
 =============
 Python 3 -- for more robust unicode handling.
+
 [Misaka](http://misaka.61924.nl/) -- a python wrapper for the Sundown markdown
                                      processor.
+                                     
 [Jinja2](http://jinja.pocoo.org/) -- a python templating engine.
 
 
 Setup
 ==========
 Example installation (note the use of the python 3 specific pip):
+
     pip-3.2 install misaka Jinja2
 
 git clone this repository
 
 misaka_md2html.py must be executable:
+
     chmod 755 misaka_md2html.py
 
 Required Vimwiki Settings in vimrc:
+
 1.  custom_wiki2html should point to misaka_md2html.py
 2.  path_html must be set
 3.  syntax should equal 'markdown'
