@@ -6,7 +6,16 @@ misaka              http://misaka.61924.nl/
 jinja2              http://jinja.pocoo.org/
 
 example installation (note the use of the python 3 specific pip):
-pip-3.2 install misaka Jinja2
+    pip-3.2 install misaka Jinja2
+
+This file must be executable:
+    chmod 755 misaka_md2html.py
+
+Required Vimwiki Settings in vimrc:
+1.  custom_wiki2html should point to this file.
+2.  path_html must be set
+3.  syntax should equal 'markdown'
+4.  css_name should point to the css file you want to use.  This has a default value of style.css so copying the provided style.css from autoload/vimwiki/ to your path_html should be sufficient to get started. 
 
 """
 
@@ -57,7 +66,6 @@ template = Template("""
         vimwiki-option-template_ext
 
 """
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -156,48 +164,12 @@ if __name__ == '__main__':
                         'no_html':nohtml_text, 'template':template_text}
                 text = self.process_percent_codes(text, patterns)
                 return text
-                """
-                title_pat = re.compile(title_text, re.MULTILINE)
-                title_match = title_pat.search(text)
-                if title_match:
-                    self.title = title_match.group('title')
-                    print('>>' + title_match.group() + '<<')
-                    print(text[:title_match.start()]+'<<<<')
-                    print('>>>>'+text[title_match.end():100])
-                    # cut the title line out since it will be fed back to the 
-                    # template separately
-                    # text = title_pat.sub('\n',text,count=1)
-                    text = text[:title_match.start()] + text[title_match.end():]
-                else:
-                    self.title = ''
-
-                toc_pat = re.compile(toc_text, re.MULTILINE)
-                toc_match = toc_pat.search(text)
-                if toc_match:
-                    self.toc = True
-                    # cut the toc line out
-                    text = text[:toc_match.start()] + text[toc_match.end():]
-                else:
-                    self.toc = False
-
-
-                nohtml_pat = re.compile(nohtml_text, re.MULTILINE)
-                nohtml_match = nohtml_pat.search(text)
-                if nohtml_match:
-                    self.generate_html = False
-                    # cut the nohtml line out
-                    text = text[:nohtml_match.start()] + text[nohtml_match.end():]
-                else:
-                    self.generate_html = True
-
-                """
 
         class VimwikiTocRenderer(HtmlTocRenderer, LinkPreprocessor):
             pass
 
         class VimwikiHtmlRenderer(HtmlRenderer, LinkPreprocessor):
             pass
-
 
         renderer = VimwikiHtmlRenderer(HTML_TOC)
         to_html = Markdown(renderer, extensions= EXT_NO_INTRA_EMPHASIS | 
